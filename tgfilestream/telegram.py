@@ -37,7 +37,6 @@ transfer = ParallelTransferrer(client)
       	
 @client.on(events.NewMessage)
 async def handle_message(evt: events.NewMessage.Event) -> None:
-async def hmm(event):
     if Config.JTU_ENABLE:
     	starky = await check_if_subbed(Config.CHANNEL_USERNAME)
     	if starky is False:
