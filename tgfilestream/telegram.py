@@ -17,6 +17,7 @@ import logging
 
 from telethon import TelegramClient, events
 from telethon.sessions import StringSession
+from starkfunc import check_if_subbed
 
 from .paralleltransfer import ParallelTransferrer
 from .config import (
@@ -37,6 +38,11 @@ transfer = ParallelTransferrer(client)
 
 @client.on(events.NewMessage)
 async def handle_message(evt: events.NewMessage.Event) -> None:
+    if Config.JTU_ENABLE:
+    	starky = await check_if_subbed(Config.CHANNEL_USERNAME, event, warnerstarkbot)
+    	if starky is False:
+        	await event.reply("**I am Sorry To Say That, To Access Me You Have To Be The Member Of Our Channel To Use This Bot..!**", buttons=[[custom.Button.url("Join Channel", Config.CHANNEL_URL)]])
+        	return
     if not evt.is_private:
         await evt.reply(group_chat_message)
         return
