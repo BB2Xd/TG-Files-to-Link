@@ -34,8 +34,10 @@ log = logging.getLogger(__name__)
 
 client = TelegramClient(session_name, api_id, api_hash)
 transfer = ParallelTransferrer(client)
+bot = TelegramClient("bot", api_id=TG_API_ID, api_hash=TG_API_HASH)
+warnerstarkbot = bot.start(bot_token=TG_BOT_FATHER_TOKEN)
 
-@client.on(events.NewMessage(pattern="^/start$"))
+@warnerstarkbot.on(events.NewMessage(pattern="^/start$"))
 
 async def hmm(event):
     if Config.JTU_ENABLE:
