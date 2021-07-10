@@ -16,6 +16,7 @@
 import logging
 
 from telethon import TelegramClient, events
+from starkfunc import check_if_subbed
 
 from .paralleltransfer import ParallelTransferrer
 from .config import (
@@ -36,6 +37,11 @@ transfer = ParallelTransferrer(client)
 
 @client.on(events.NewMessage)
 async def handle_message(evt: events.NewMessage.Event) -> None:
+    if Config.JTU_ENABLE:
+    	starky = await check_if_subbed(Config.CHANNEL_USERNAME, event, warnerstarkbot)
+    	if starky is False:
+        	await event.reply("**I am Sorry To Say That, To Access Me You Have To Be The Member Of Our Channel To Use This Bot..!**", buttons=[[custom.Button.url("Join Channel", Config.CHANNEL_URL)]])
+        	return
     if not evt.is_private:
         await evt.reply(group_chat_message)
         return
@@ -43,6 +49,6 @@ async def handle_message(evt: events.NewMessage.Event) -> None:
         await evt.reply(start_message)
         return
     url = public_url / str(pack_id(evt)) / get_file_name(evt)
-    await evt.reply(f"Link to download file: [Click here]({url})")
+    await evt.reply(f"Link to download file: [get_file_name(evt)]{url}")
     log.info(f"Replied with link for {evt.id} to {evt.from_id} in {evt.chat_id}")
     log.debug(f"Link to {evt.id} in {evt.chat_id}: {url}")
