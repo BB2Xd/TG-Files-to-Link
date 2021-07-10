@@ -34,19 +34,18 @@ log = logging.getLogger(__name__)
 
 client = TelegramClient(session_name, api_id, api_hash)
 transfer = ParallelTransferrer(client)
-bot = TelegramClient("bot", api_id=TG_API_ID, api_hash=TG_API_HASH)
-warnerstarkbot = bot.start(bot_token=TG_BOT_FATHER_TOKEN)
-
-@warnerstarkbot.on(events.NewMessage(pattern="^/start$"))
-
-async def hmm(event):
-    if Config.JTU_ENABLE:
-    	starky = await check_if_subbed(Config.CHANNEL_USERNAME, event, warnerstarkbot)
-    	if starky is False:
-        	await event.reply("**I am Sorry To Say That, To Access Me You Have To Be The Member Of Our Channel To Use This Bot..!**", buttons=[[custom.Button.url("Join Channel", Config.CHANNEL_URL)]])
-        	
+      	
 @client.on(events.NewMessage)
 async def handle_message(evt: events.NewMessage.Event) -> None:
+async def hmm(event):
+    if Config.JTU_ENABLE:
+    	starky = await check_if_subbed(Config.CHANNEL_USERNAME)
+    	if starky is False:
+        	await evt.reply("**I am Sorry To Say That, To Access Me You Have To Be The Member Of Our Channel To Use This Bot..!**", buttons=[[custom.Button.url("Join Channel", Config.CHANNEL_URL)]])
+        return
+    if not evt.is_private:
+        await evt.reply(group_chat_message)
+        return
     if not evt.file:
         await evt.reply(start_message)
         return
