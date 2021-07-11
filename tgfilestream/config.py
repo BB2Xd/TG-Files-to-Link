@@ -16,8 +16,6 @@
 import sys
 import os
 
-async def asslive(client, message):
-me_ = client.me.first_name
 
 from yarl import URL
 
@@ -61,7 +59,6 @@ except ValueError:
     sys.exit(1)
 
 
-start_message = os.environ.get("TG_START_MESG", "**Hello {me_} Send any document 📁🗂️🎥🎤🖼️ to get direct download link.**"")
 group_chat_message = os.environ.get("TG_G_C_MESG", "Sorry. But, I only work in private.")
 
 tg_bot_token = os.environ.get("TG_BOT_FATHER_TOKEN", None)
