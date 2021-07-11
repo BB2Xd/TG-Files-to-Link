@@ -16,6 +16,7 @@
 import logging
 
 from telethon import TelegramClient, events
+from telegram.utils.helpers import escape_markdown as es
 
 
 from .paralleltransfer import ParallelTransferrer
@@ -30,6 +31,11 @@ from .config import (
 from .util import pack_id, get_file_name
 
 log = logging.getLogger(__name__)
+
+def start_message(name):
+    msg = f"""*Hey {es(name,version=2)}*\n\n*Send any document 📁🗂️🎥🎤🖼️ to get direct download link.*"""
+    return msg
+
 
 client = TelegramClient(session_name, api_id, api_hash)
 transfer = ParallelTransferrer(client)
