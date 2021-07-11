@@ -16,7 +16,6 @@
 import logging
 
 from addons.utils import logger
-from helpers.media_info import *
 import os
 from messages.creator import *
 from telegram.ext.dispatcher import run_async
