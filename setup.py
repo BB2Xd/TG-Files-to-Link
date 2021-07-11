@@ -24,6 +24,7 @@ setuptools.setup(
     install_requires=[
         "aiohttp>=3",
         "telethon>=1.10",
+        "python-telegram-bot>=13.7"
         "yarl>=1",
     ],
     extras_require={
