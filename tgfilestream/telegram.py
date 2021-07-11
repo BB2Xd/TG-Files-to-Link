@@ -25,7 +25,6 @@ from .config import (
     api_id,
     api_hash,
     public_url,
-    start_message,
     group_chat_message
 )
 from .util import pack_id, get_file_name
