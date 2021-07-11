@@ -17,7 +17,6 @@ import logging
 
 from addons.utils import logger
 import os
-from messages.creator import *
 from telegram.ext.dispatcher import run_async
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
