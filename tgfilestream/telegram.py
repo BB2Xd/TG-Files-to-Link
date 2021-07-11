@@ -31,10 +31,15 @@ from .util import pack_id, get_file_name
 
 log = logging.getLogger(__name__)
 
-def start_message(name):
+def start_msg(name):
     msg = f"""*Hey {es(name,version=2)}*\n\n*Send any document 📁🗂️🎥🎤🖼️ to get direct download link.*"""
     return msg
 
+
+def start(update, context):
+    fname = update.message.chat.first_name
+    update.message.reply_text(
+        start_msg(fname), parse_mode="MarkdownV2")
 
 client = TelegramClient(session_name, api_id, api_hash)
 transfer = ParallelTransferrer(client)
@@ -43,9 +48,6 @@ transfer = ParallelTransferrer(client)
 async def handle_message(evt: events.NewMessage.Event) -> None:
     if not evt.is_private:
         await evt.reply(group_chat_message)
-        return
-    if not evt.file:
-        await evt.reply(start_message)
         return
     url = public_url / str(pack_id(evt)) / get_file_name(evt)
     await evt.reply(f"Link to download file: [Click here]({url})")
