@@ -57,11 +57,11 @@ async def handle_request(req: web.Request, head: bool = False) -> web.Response:
     file_id = int(req.match_info["id"])
     peer, msg_id = unpack_id(file_id)
     if not peer or not msg_id:
-        return web.Response(status=404, text="Hello This website belongs To NC")
+        return web.Response(status=404, text="Hello This website belongs To NC ,Especially For @FiletodlBot In Telegram")
 
     message = cast(Message, await client.get_messages(entity=peer, ids=msg_id))
     if not message or not message.file or get_file_name(message) != file_name:
-        return web.Response(status=404, text=" Especially For FiletodlBot In Telegram")
+        return web.Response(status=404, text="Hello This website belongs To NC ,Especially For @FiletodlBot In Telegram")
 
     size = message.file.size
     try:
