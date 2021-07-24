@@ -6,6 +6,7 @@
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
+#.   This is also written amd changed by BB2Xd So don't copy it please 
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -16,8 +17,6 @@
 import logging
 
 from telethon import TelegramClient, events
-from telethon.sessions import StringSession
-#from starkfunc import check_if_subbed
 
 from .paralleltransfer import ParallelTransferrer
 from .config import (
@@ -32,10 +31,9 @@ from .util import pack_id, get_file_name
 
 log = logging.getLogger(__name__)
 
-client = TelegramClient(StringSession(session_name), api_id, api_hash)
+client = TelegramClient(session_name, api_id, api_hash)
 transfer = ParallelTransferrer(client)
-
-
+      	
 @client.on(events.NewMessage)
 async def handle_message(evt: events.NewMessage.Event) -> None:
     if not evt.is_private:
@@ -45,6 +43,6 @@ async def handle_message(evt: events.NewMessage.Event) -> None:
         await evt.reply(start_message)
         return
     url = public_url / str(pack_id(evt)) / get_file_name(evt)
-    await evt.reply(f"Link to download file: {url}")
+    await evt.reply(f"**Link to Download File :** **[Click here]({url})**")
     log.info(f"Replied with link for {evt.id} to {evt.from_id} in {evt.chat_id}")
     log.debug(f"Link to {evt.id} in {evt.chat_id}: {url}")
