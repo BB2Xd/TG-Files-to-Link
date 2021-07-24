@@ -52,7 +52,7 @@ except ValueError:
 
 try:
     # The per-DC connection limit
-    connection_limit = int(os.environ.get("CONNECTION_LIMIT", "20"))
+    connection_limit = int(os.environ.get("CONNECTION_LIMIT", "16"))
 except ValueError:
     print("Please make sure the CONNECTION_LIMIT environment variable is an integer")
     sys.exit(1)
